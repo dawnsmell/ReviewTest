@@ -166,17 +166,14 @@ public class UnitHomming : UnitBullet {
 			{
 				crPath.Add( (Vector3)iter.Current );
 			}
-			//foreach( Vector3 pt in res )
-			//{
-			//	crPath.Add( pt );
-			//}
 
 			count = crPath.Count;
 			float startMovetime = m_ShotStartTime / ( detail * m_ShotNodePos.Count + 1 );
 			float checkTime = 0;
+			checkTime += Time.deltaTime;
 			for( int i = 0; i < (int)( detail * 1.1f ); )
 			{
-				checkTime += Time.deltaTime;
+				//checkTime += Time.deltaTime;
 				float value = checkTime / startMovetime;
 				int nowIndex = (int)( value );
 				value -= nowIndex;
@@ -186,7 +183,6 @@ public class UnitHomming : UnitBullet {
 				transform.position = Vector3.Lerp( nowP, nextP, value );
 				transform.LookAt( nextP );
 				i = nowIndex;
-				//yield return new WaitForEndOfFrame();
 				yield return Yielders.EndOfFrame;
 			}
 		}
